@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CHOVARAM AI MUSIC STUDIO 2.0</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#100d1c;color:white;font-family:Arial}
+header{padding:17px;background:#211735;display:flex;gap:12px;align-items:center}
+.logo{background:linear-gradient(135deg,#b36aff,#5425b9);padding:13px;border-radius:14px;font-size:25px}
+header h2{margin:0;font-size:18px}
+header small{color:#c9aaff}
+main{padding:17px}
+.hero{padding:22px;background:linear-gradient(135deg,#6338ae,#26173e);border-radius:18px}
+.hero h1{margin-top:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{padding:17px 10px;background:#251d36;border:1px solid #483460;border-radius:16px;text-align:center;cursor:pointer}
+.card:active{background:#503474}
+.card div{font-size:30px}
+.card h3{font-size:14px}
+.panel{background:#251d36;padding:16px;border-radius:16px;margin-top:18px}
+input,textarea,select{width:100%;padding:13px;margin:8px 0 14px;border-radius:10px;border:1px solid #66517f;background:#171323;color:white;font-size:15px}
+textarea{min-height:130px;resize:vertical}
+button{padding:13px;border:0;border-radius:10px;background:#9055ed;color:white;font-size:15px;width:100%;cursor:pointer}
+.secondary{background:#49346b;margin-top:9px}
+.project{background:#35284b;padding:12px;margin:10px 0;border-radius:10px}
+small{color:#c9b9e0}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">🎵</div>
+ <div>
+  <h2>CHOVARAM</h2>
+  <small>AI MUSIC STUDIO • VERSION 2.0</small>
+ </div>
+</header>
+
+<main>
+ <div class="hero">
+  <h1>अपना संगीत बनाइए 🎶</h1>
+  <p>Write • Compose • Create</p>
+  <button onclick="showEditor()">+ नया प्रोजेक्ट बनाएँ</button>
+ </div>
+
+ <h3>🎧 Music Studio</h3>
+ <div class="grid">
+  <div class="card" onclick="showEditor()"><div>🎼</div><h3>Music Creator</h3></div>
+  <div class="card" onclick="showEditor()"><div>✍️</div><h3>Lyrics Writer</h3></div>
+  <div class="card" onclick="showEditor()"><div>🎤</div><h3>Voice Studio</h3></div>
+  <div class="card" onclick="showEditor()"><div>🥁</div><h3>Panthi Beats</h3></div>
+ </div>
+
+ <div class="panel" id="editor">
+  <h3>✍️ Music Project Editor</h3>
+  <label>गाने का नाम</label>
+  <input id="songName" placeholder="गाने का नाम लिखें">
+  <label>संगीत की शैली</label>
+  <select id="genre">
+   <option>पंथी संगीत</option>
+   <option>छत्तीसगढ़ी लोकगीत</option>
+   <option>भजन</option>
+   <option>कर्मा गीत</option>
+   <option>ददरिया</option>
+   <option>अन्य</option>
+  </select>
+  <label>अपने गाने के बोल लिखें</label>
+  <textarea id="lyrics" placeholder="यहाँ अपने गाने के बोल लिखें..."></textarea>
+  <button onclick="saveSong()">💾 प्रोजेक्ट सेव करें</button>
+ </div>
+
+ <div class="panel">
+  <h3>📚 My Music Library</h3>
+  <div id="library">अभी कोई प्रोजेक्ट सेव नहीं है।</div>
+ </div>
+</main>
+
+<script>
+let projects=[];
+try{
+ projects=JSON.parse(localStorage.getItem("chovaramProjects"))||[];
+}catch(e){projects=[];}
+
+function showEditor(){
+ document.getElementById("editor").scrollIntoView({behavior:"smooth"});
+}
+
+function saveSong(){
+ let name=document.getElementById("songName").value.trim();
+ let genre=document.getElementById("genre").value;
+ let lyrics=document.getElementById("lyrics").value.trim();
+
+ if(!name){alert("गाने का नाम लिखिए");return;}
+
+ projects.push({name,genre,lyrics});
+ localStorage.setItem("chovaramProjects",JSON.stringify(projects));
+
+ document.getElementById("songName").value="";
+ document.getElementById("lyrics").value="";
+ renderLibrary();
+ alert("आपका प्रोजेक्ट सेव हो गया!");
+}
+
+function renderLibrary(){
+ let box=document.getElementById("library");
+ if(!projects.length){
+  box.innerHTML="अभी कोई प्रोजेक्ट सेव नहीं है।";
+  return;
+ }
+ box.innerHTML="";
+ projects.forEach((p,i)=>{
+  let div=document.createElement("div");
+  div.className="project";
+  let title=document.createElement("b");
+  title.textContent=p.name;
+  let info=document.createElement("p");
+  info.textContent=p.genre;
+  let open=document.createElement("button");
+  open.textContent="खोलें";
+  open.onclick=()=>loadProject(i);
+  let del=document.createElement("button");
+  del.textContent="हटाएँ";
+  del.className="secondary";
+  del.onclick=()=>deleteProject(i);
+  div.append(title,info,open,del);
+  box.appendChild(div);
+ });
+}
+
+function loadProject(i){
+ let p=projects[i];
+ document.getElementById("songName").value=p.name;
+ document.getElementById("genre").value=p.genre;
+ document.getElementById("lyrics").value=p.lyrics;
+ showEditor();
+}
+
+function deleteProject(i){
+ if(confirm("क्या यह प्रोजेक्ट हटाना चाहते हैं?")){
+  projects.splice(i,1);
+  localStorage.setItem("chovaramProjects",JSON.stringify(projects));
+  renderLibrary();
+ }
+}
+renderLibrary();
+</script>
+</body>
+</html>
