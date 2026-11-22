@@ -1,0 +1,803 @@
+<div class="contact-box">
+  <h2>🎵 ऐसी ही गाना बनवाने के लिए संपर्क करें 🎵</h2>
+  <h3>महिलांग एडिटर</h3>
+  <p>📱 मोबाइल नंबर: 7803045723</p>
+  <a href="tel:7803045723" class="contact-btn">
+    📞 अभी संपर्क करें
+  </a>
+</div>
+
+<style>
+.contact-box {
+  background: linear-gradient(135deg, #17104b, #a00080);
+  color: white;
+  text-align: center;
+  padding: 22px;
+  margin: 15px;
+  border-radius: 18px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 12px #888;
+}
+
+.contact-box h2 {
+  font-size: 21px;
+}
+
+.contact-box h3 {
+  color: #ffdf45;
+  font-size: 25px;
+}
+
+.contact-box p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.contact-btn {
+  display: inline-block;
+  background: #19c45b;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+}
+</style>
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#130d22">
+<title>CHOVARAM AI MUSIC STUDIO</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#100d1c;color:#fff;
+ font-family:Arial,sans-serif;
+}
+header{
+ background:#211735;padding:15px;
+ display:flex;align-items:center;gap:12px;
+ position:sticky;top:0;z-index:10;
+ border-bottom:1px solid #493461;
+}
+.logo{
+ width:48px;height:48px;border-radius:15px;
+ background:linear-gradient(135deg,#bd75ff,#5025a5);
+ display:grid;place-items:center;font-size:27px;
+}
+header h2{margin:0;font-size:17px}
+header small{color:#c8aaff}
+main{padding:15px;padding-bottom:45px}
+.hero{
+ background:linear-gradient(135deg,#7142bd,#211735);
+ padding:23px;border-radius:20px;margin-bottom:20px;
+}
+.hero h1{font-size:25px;margin-top:0}
+.hero p{color:#e0d4f4}
+button{
+ background:#9258ed;color:white;border:0;
+ padding:13px;border-radius:11px;
+ font-size:14px;width:100%;margin:5px 0;
+ cursor:pointer;
+}
+button:active{opacity:.75}
+.secondary{background:#49336b}
+.danger{background:#a13d50}
+.grid{
+ display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.card,.panel{
+ background:#251c36;border:1px solid #48335f;
+ border-radius:16px;padding:15px;
+}
+.card{text-align:center;cursor:pointer}
+.card:active{background:#503570}
+.card .ico{font-size:30px}
+.card h3{font-size:14px}
+.panel{margin-top:17px}
+input,select,textarea{
+ width:100%;padding:13px;margin:8px 0 13px;
+ background:#171323;color:white;
+ border:1px solid #604a7c;border-radius:10px;
+ font-size:15px;
+}
+textarea{min-height:120px;resize:vertical}
+label{font-size:13px;color:#d6c3ef}
+.result{
+ background:#38264f;padding:13px;border-radius:11px;
+ white-space:pre-wrap;line-height:1.6;
+ overflow-wrap:anywhere;margin:10px 0;
+}
+.item{
+ background:#38264f;padding:13px;
+ border-radius:12px;margin:10px 0;
+ overflow-wrap:anywhere;
+}
+.item p{white-space:pre-wrap;line-height:1.5}
+audio{width:100%;margin:10px 0}
+.nav{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:7px;margin:15px 0;
+}
+.nav button{font-size:12px;padding:11px 4px}
+.muted{color:#bdaed0;font-size:12px}
+footer{text-align:center;color:#b9a8d1;padding:22px;font-size:12px}
+.hidden{display:none}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">🎵</div>
+ <div>
+  <h2>CHOVARAM</h2>
+  <small>AI MUSIC STUDIO • ALL IN ONE</small>
+ </div>
+</header>
+
+<main>
+
+<div class="hero">
+ <h1>Welcome to Music Studio 🎶</h1>
+ <p>आपका अपना डिजिटल म्यूजिक स्टूडियो।</p>
+ <button onclick="go('creator')">＋ Create New Music</button>
+</div>
+
+<div class="nav">
+ <button onclick="go('creator')">🎼 Music</button>
+ <button onclick="go('lyrics')">✍️ Lyrics</button>
+ <button onclick="go('voice')">🎤 Voice</button>
+ <button onclick="go('panthi')">🥁 Panthi</button>
+ <button onclick="go('projects')">📁 Projects</button>
+ <button onclick="go('backup')">💾 Backup</button>
+</div>
+
+<h3>🎧 All Music Features</h3>
+
+<div class="grid">
+ <div class="card" onclick="go('creator')">
+  <div class="ico">🎼</div><h3>AI Music Maker</h3>
+ </div>
+ <div class="card" onclick="go('lyrics')">
+  <div class="ico">✍️</div><h3>Lyrics Generator</h3>
+ </div>
+ <div class="card" onclick="go('voice')">
+  <div class="ico">🎤</div><h3>Voice Studio</h3>
+ </div>
+ <div class="card" onclick="go('panthi')">
+  <div class="ico">🥁</div><h3>Panthi Music</h3>
+ </div>
+ <div class="card" onclick="go('cg')">
+  <div class="ico">🎹</div><h3>CG Music</h3>
+ </div>
+ <div class="card" onclick="go('audio')">
+  <div class="ico">🎧</div><h3>Audio Player</h3>
+ </div>
+ <div class="card" onclick="go('projects')">
+  <div class="ico">📁</div><h3>My Projects</h3>
+ </div>
+ <div class="card" onclick="go('backup')">
+  <div class="ico">💾</div><h3>Backup Restore</h3>
+ </div>
+</div>
+
+<!-- MUSIC CREATOR -->
+
+<div class="panel" id="creator">
+<h3>🎼 AI Music Creator</h3>
+
+<label>गाने का नाम</label>
+<input id="songName" placeholder="गाने का नाम">
+
+<label>संगीत शैली</label>
+<select id="style">
+<option>Chhattisgarhi Panthi Music</option>
+<option>Chhattisgarhi Folk</option>
+<option>Bhajan</option>
+<option>Karma Music</option>
+<option>Dadariya</option>
+<option>Indian Classical</option>
+<option>Bollywood Style</option>
+</select>
+
+<label>गाने का विषय</label>
+<textarea id="topic" placeholder="गाने का विषय लिखें"></textarea>
+
+<label>गायक की शैली</label>
+<select id="vocal">
+<option>Male Vocal</option>
+<option>Female Vocal</option>
+<option>Group Chorus</option>
+<option>Male and Female Duet</option>
+</select>
+
+<button onclick="makeMusic()">✨ Generate Music Prompt</button>
+
+<div class="result" id="musicResult">
+आपका Music Prompt यहाँ आएगा।
+</div>
+
+<button class="secondary" onclick="copyText('musicResult')">Copy Prompt</button>
+<button class="secondary" onclick="downloadText('musicResult','Music-Prompt.txt')">Download Prompt</button>
+<button onclick="saveMusic()">💾 Save Music Project</button>
+</div>
+
+<!-- LYRICS -->
+
+<div class="panel" id="lyrics">
+<h3>✍️ Lyrics Generator Studio</h3>
+
+<label>गीत का नाम</label>
+<input id="lyTitle" placeholder="गीत का नाम">
+
+<label>गीत का विषय</label>
+<input id="lyTopic" placeholder="जैसे गुरु घासीदास बाबा">
+
+<label>गीत की शैली</label>
+<select id="lyStyle">
+<option>छत्तीसगढ़ी पंथी गीत</option>
+<option>छत्तीसगढ़ी भजन</option>
+<option>छत्तीसगढ़ी लोकगीत</option>
+<option>हिंदी भजन</option>
+<option>कर्मा गीत</option>
+<option>ददरिया गीत</option>
+</select>
+
+<button onclick="makeLyrics()">Generate Lyrics Draft</button>
+
+<label>गीत के बोल</label>
+<textarea id="lyText" placeholder="अपने गीत के बोल यहाँ लिखें"></textarea>
+
+<button onclick="saveLyrics()">💾 Save Lyrics</button>
+<button class="secondary" onclick="downloadLyrics()">Download Lyrics</button>
+</div>
+
+<!-- VOICE -->
+
+<div class="panel" id="voice">
+<h3>🎤 Voice Recording Studio</h3>
+
+<p class="muted">अपनी आवाज रिकॉर्ड करें।</p>
+
+<button onclick="startRecording()">🔴 Start Recording</button>
+<button class="secondary" onclick="stopRecording()">⏹ Stop Recording</button>
+
+<p id="recordStatus">Recording बंद है।</p>
+
+<audio id="recordPlayer" controls></audio>
+
+<button onclick="downloadRecording()">⬇ Download Recording</button>
+
+<p class="muted">
+यह रिकॉर्डिंग सुविधा है। AI Voice Conversion के लिए अलग AI सेवा और आवाज़ के मालिक की अनुमति आवश्यक है।
+</p>
+</div>
+
+<!-- PANTHI -->
+
+<div class="panel" id="panthi">
+<h3>🥁 Panthi Music Studio</h3>
+
+<label>गीत का विषय</label>
+<input id="panthiTopic" placeholder="पंथी गीत का विषय">
+
+<button onclick="panthiPrompt()">Create Panthi Prompt</button>
+
+<div class="result" id="panthiResult">
+पंथी म्यूजिक प्रॉम्प्ट यहाँ आएगा।
+</div>
+
+<button class="secondary" onclick="copyText('panthiResult')">Copy Prompt</button>
+<button onclick="saveSpecial('Panthi Music','panthiResult')">Save Panthi Project</button>
+</div>
+
+<!-- CG MUSIC -->
+
+<div class="panel" id="cg">
+<h3>🎹 Chhattisgarhi Music Studio</h3>
+
+<label>गीत का विषय</label>
+<input id="cgTopic" placeholder="छत्तीसगढ़ी गीत का विषय">
+
+<label>संगीत प्रकार</label>
+<select id="cgStyle">
+<option>Chhattisgarhi Folk</option>
+<option>Dadariya</option>
+<option>Karma</option>
+<option>Chhattisgarhi Bhajan</option>
+<option>Panthi</option>
+</select>
+
+<button onclick="cgPrompt()">Generate CG Music Prompt</button>
+
+<div class="result" id="cgResult">
+आपका CG Music Prompt यहाँ आएगा।
+</div>
+
+<button class="secondary" onclick="copyText('cgResult')">Copy Prompt</button>
+<button onclick="saveSpecial('CG Music','cgResult')">Save CG Project</button>
+</div>
+
+<!-- AUDIO PLAYER -->
+
+<div class="panel" id="audio">
+<h3>🎧 Audio Player</h3>
+
+<label>मोबाइल से ऑडियो चुनें</label>
+<input type="file" id="audioFile" accept="audio/*">
+
+<audio id="audioPlayer" controls></audio>
+
+<p class="muted">अपने मोबाइल के ऑडियो सुनें।</p>
+</div>
+
+<!-- PROJECTS -->
+
+<div class="panel" id="projects">
+<h3>📁 My Music Projects</h3>
+<div id="projectList">कोई प्रोजेक्ट नहीं है।</div>
+</div>
+
+<!-- BACKUP -->
+
+<div class="panel" id="backup">
+<h3>💾 Backup & Restore</h3>
+
+<p class="muted">अपने सभी प्रोजेक्ट का बैकअप डाउनलोड करें।</p>
+
+<button onclick="backupData()">Download All Backup</button>
+
+<label>पुराना Backup वापस लाएँ</label>
+<input type="file" id="backupFile" accept=".json,application/json">
+
+<button class="secondary" onclick="restoreData()">Restore Backup</button>
+</div>
+
+</main>
+
+<footer>
+CHOVARAM AI MUSIC STUDIO<br>
+ALL IN ONE FINAL EDITION<br>
+CREATE • SING • COMPOSE
+</footer>
+
+<script>
+
+const KEY="CHOVARAM_ALL_IN_ONE";
+let projects=[];
+
+try{
+ projects=JSON.parse(localStorage.getItem(KEY)||"[]");
+ if(!Array.isArray(projects))projects=[];
+}catch(e){projects=[];}
+
+let mediaRecorder=null;
+let recordingBlob=null;
+let recordingURL=null;
+let chunks=[];
+
+function go(id){
+ document.getElementById(id).scrollIntoView({
+ behavior:"smooth"
+ });
+}
+
+function store(){
+ try{
+ localStorage.setItem(KEY,JSON.stringify(projects));
+ return true;
+ }catch(e){
+ alert("स्टोरेज भर गया है। बैकअप डाउनलोड करें।");
+ return false;
+ }
+}
+
+// MUSIC PROMPT
+
+function makeMusic(){
+
+ let name=songName.value.trim();
+ let topic=document.getElementById("topic").value.trim();
+ let style=document.getElementById("style").value;
+ let vocal=document.getElementById("vocal").value;
+
+ if(!name||!topic){
+ alert("गाने का नाम और विषय लिखें।");
+ return;
+ }
+
+ musicResult.textContent=
+ "Create an original "+style+" song. "+
+ "Title: "+name+". "+
+ "Topic: "+topic+". "+
+ "Vocals: "+vocal+". "+
+ "Use beautiful original melodies, traditional instruments, "+
+ "professional rhythm, clear vocals and studio quality production.";
+}
+
+// LYRICS GENERATOR
+
+function makeLyrics(){
+
+ let topic=document.getElementById("lyTopic").value.trim();
+ let style=document.getElementById("lyStyle").value;
+
+ if(!topic){
+ alert("गीत का विषय लिखें।");
+ return;
+ }
+
+ document.getElementById("lyText").value=
+ "गीत शैली: "+style+
+ "\nविषय: "+topic+
+ "\n\nमुखड़ा:\n"+
+ topic+" की महिमा गाएँ,\n"+
+ "मिलकर सुंदर गीत सुनाएँ।\n"+
+ "सुर और ताल मिलाएँ,\n"+
+ "प्रेम का संदेश फैलाएँ।"+
+ "\n\nअंतरा 1:\n"+
+ "नई उमंग से कदम बढ़ाएँ,\n"+
+ "सच्चाई का दीप जलाएँ।"+
+ "\n\nअंतरा 2:\n"+
+ "मिलकर अपनी धुन सजाएँ,\n"+
+ "खुशियों के गीत सुनाएँ।";
+}
+
+// SAVE MUSIC
+
+function addProject(type,name,content){
+
+ if(!name||!content){
+ alert("पहले सामग्री तैयार करें।");
+ return;
+ }
+
+ projects.push({
+ id:Date.now()+Math.random(),
+ type:type,
+ name:name,
+ content:content,
+ date:new Date().toLocaleDateString()
+ });
+
+ if(store()){
+ renderProjects();
+ alert("प्रोजेक्ट सेव हो गया!");
+ }
+}
+
+function saveMusic(){
+ addProject(
+ "Music Prompt",
+ document.getElementById("songName").value.trim(),
+ document.getElementById("musicResult").textContent
+ );
+}
+
+function saveLyrics(){
+ addProject(
+ "Lyrics",
+ document.getElementById("lyTitle").value.trim(),
+ document.getElementById("lyText").value.trim()
+ );
+}
+
+function saveSpecial(type,id){
+ let topic="";
+ if(type==="Panthi Music"){
+ topic=document.getElementById("panthiTopic").value.trim();
+ }else{
+ topic=document.getElementById("cgTopic").value.trim();
+ }
+ addProject(type,topic,document.getElementById(id).textContent);
+}
+
+// PANTHI PROMPT
+
+function panthiPrompt(){
+
+ let topic=document.getElementById("panthiTopic").value.trim();
+
+ if(!topic){
+ alert("गीत का विषय लिखें।");
+ return;
+ }
+
+ document.getElementById("panthiResult").textContent=
+ "Original Chhattisgarhi Panthi devotional music. "+
+ "Topic: "+topic+". "+
+ "Energetic male lead vocals, group chorus, traditional "+
+ "jhanjh, manjira, dholak and octapad, powerful percussion, "+
+ "uplifting melody and live stage atmosphere.";
+}
+
+// CG PROMPT
+
+function cgPrompt(){
+
+ let topic=document.getElementById("cgTopic").value.trim();
+ let style=document.getElementById("cgStyle").value;
+
+ if(!topic){
+ alert("गीत का विषय लिखें।");
+ return;
+ }
+
+ document.getElementById("cgResult").textContent=
+ "Create original Chhattisgarhi "+style+
+ " music about "+topic+
+ ". Use authentic Chhattisgarhi folk instruments, "+
+ "expressive vocals, catchy melody, rhythmic percussion "+
+ "and professional recording.";
+}
+
+// PROJECT LIBRARY
+
+function renderProjects(){
+
+ let box=document.getElementById("projectList");
+ box.replaceChildren();
+
+ if(!projects.length){
+ box.textContent="अभी कोई प्रोजेक्ट नहीं है।";
+ return;
+ }
+
+ projects.forEach((p,i)=>{
+
+ let div=document.createElement("div");
+ div.className="item";
+
+ let title=document.createElement("b");
+ title.textContent=p.name;
+
+ let type=document.createElement("p");
+ type.textContent=p.type+" • "+(p.date||"");
+
+ let content=document.createElement("p");
+ content.textContent=p.content;
+
+ let edit=document.createElement("button");
+ edit.textContent="Edit / Open";
+
+ edit.onclick=()=>{
+  if(p.type==="Lyrics"){
+   document.getElementById("lyTitle").value=p.name;
+   document.getElementById("lyText").value=p.content;
+   go("lyrics");
+  }else if(p.type==="Music Prompt"){
+   document.getElementById("songName").value=p.name;
+   document.getElementById("musicResult").textContent=p.content;
+   go("creator");
+  }else if(p.type==="Panthi Music"){
+   document.getElementById("panthiTopic").value=p.name;
+   document.getElementById("panthiResult").textContent=p.content;
+   go("panthi");
+  }else{
+   document.getElementById("cgTopic").value=p.name;
+   document.getElementById("cgResult").textContent=p.content;
+   go("cg");
+  }
+ };
+
+ let del=document.createElement("button");
+ del.className="danger";
+ del.textContent="Delete";
+
+ del.onclick=()=>{
+  if(confirm("क्या यह प्रोजेक्ट हटाना है?")){
+   projects.splice(i,1);
+   store();
+   renderProjects();
+  }
+ };
+
+ div.append(title,type,content,edit,del);
+ box.append(div);
+ });
+}
+
+// COPY
+
+function copyText(id){
+
+ let value=document.getElementById(id).textContent;
+
+ if(navigator.clipboard){
+ navigator.clipboard.writeText(value)
+ .then(()=>alert("कॉपी हो गया!"))
+ .catch(()=>alert("कॉपी नहीं हुआ।"));
+ }else{
+ alert("टेक्स्ट को मैन्युअली कॉपी करें।");
+ }
+}
+
+// DOWNLOAD
+
+function downloadFile(blob,name){
+
+ let url=URL.createObjectURL(blob);
+ let a=document.createElement("a");
+ a.href=url;
+ a.download=name;
+ a.click();
+
+ setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+
+function downloadText(id,name){
+ let text=document.getElementById(id).textContent;
+ if(!text){alert("पहले सामग्री बनाएँ।");return;}
+ downloadFile(new Blob([text],{type:"text/plain;charset=utf-8"}),name);
+}
+
+function downloadLyrics(){
+
+ let text=document.getElementById("lyText").value;
+
+ if(!text){
+ alert("पहले Lyrics लिखें।");
+ return;
+ }
+
+ downloadFile(
+ new Blob([text],{type:"text/plain;charset=utf-8"}),
+ "CHOVARAM-Lyrics.txt"
+ );
+}
+
+// VOICE RECORDING
+
+async function startRecording(){
+
+ try{
+
+ if(!navigator.mediaDevices||
+ !navigator.mediaDevices.getUserMedia){
+ alert("रिकॉर्डिंग के लिए HTTPS Preview खोलें।");
+ return;
+ }
+
+ if(mediaRecorder&&mediaRecorder.state==="recording"){
+ alert("रिकॉर्डिंग पहले से चालू है।");
+ return;
+ }
+
+ let stream=await navigator.mediaDevices.getUserMedia({
+ audio:true
+ });
+
+ chunks=[];
+
+ mediaRecorder=new MediaRecorder(stream);
+
+ mediaRecorder.ondataavailable=e=>{
+ if(e.data.size)chunks.push(e.data);
+ };
+
+ mediaRecorder.onstop=()=>{
+
+ recordingBlob=new Blob(chunks,{
+ type:mediaRecorder.mimeType||"audio/webm"
+ });
+
+ if(recordingURL)URL.revokeObjectURL(recordingURL);
+
+ recordingURL=URL.createObjectURL(recordingBlob);
+
+ document.getElementById("recordPlayer").src=recordingURL;
+ document.getElementById("recordStatus").textContent="रिकॉर्डिंग तैयार है।";
+
+ stream.getTracks().forEach(t=>t.stop());
+ };
+
+ mediaRecorder.start();
+
+ document.getElementById("recordStatus").textContent="Recording चालू है...";
+
+ }catch(e){
+ alert("माइक्रोफोन अनुमति नहीं मिली।");
+ }
+}
+
+function stopRecording(){
+
+ if(mediaRecorder&&mediaRecorder.state==="recording"){
+ mediaRecorder.stop();
+ }else{
+ alert("पहले रिकॉर्डिंग शुरू करें।");
+ }
+}
+
+function downloadRecording(){
+
+ if(!recordingBlob){
+ alert("पहले अपनी आवाज रिकॉर्ड करें।");
+ return;
+ }
+
+ downloadFile(recordingBlob,"CHOVARAM-Voice.webm");
+}
+
+// AUDIO PLAYER
+
+document.getElementById("audioFile").onchange=function(){
+
+ let file=this.files[0];
+
+ if(file){
+ document.getElementById("audioPlayer").src=
+ URL.createObjectURL(file);
+ }
+};
+
+// BACKUP
+
+function backupData(){
+
+ let data=JSON.stringify(projects,null,2);
+
+ downloadFile(
+ new Blob([data],{type:"application/json"}),
+ "CHOVARAM-All-Backup.json"
+ );
+}
+
+// RESTORE
+
+function restoreData(){
+
+ let file=document.getElementById("backupFile").files[0];
+
+ if(!file){
+ alert("पहले Backup JSON चुनें।");
+ return;
+ }
+
+ let reader=new FileReader();
+
+ reader.onload=()=>{
+
+ try{
+
+ let data=JSON.parse(reader.result);
+
+ if(!Array.isArray(data)||!data.every(p=>
+ p&&typeof p.name==="string"&&
+ typeof p.content==="string"&&
+ typeof p.type==="string")){
+ throw new Error("Invalid backup");
+ }
+
+ if(!confirm("क्या पुराने प्रोजेक्ट बदलकर Backup वापस लाना है?"))return;
+
+ let previous=projects;
+ projects=data;
+
+ if(store()){
+ renderProjects();
+ alert("Backup Restore हो गया!");
+ }else{
+ projects=previous;
+ }
+
+ }catch(e){
+ alert("यह सही CHOVARAM Backup फाइल नहीं है।");
+ }
+
+ };
+
+ reader.readAsText(file);
+}
+
+renderProjects();
+
+</script>
+</body>
+                                                     </html>
+  
