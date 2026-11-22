@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CHOVARAM AI MUSIC STUDIO 3.0</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#100d1d;color:white;font-family:Arial}
+header{background:#211735;padding:17px;display:flex;align-items:center;gap:12px}
+.logo{background:linear-gradient(135deg,#bb72ff,#5123a5);padding:13px;border-radius:15px;font-size:27px}
+header h2{margin:0;font-size:18px}
+header small{color:#c7a8ff}
+main{padding:16px}
+.hero{padding:23px;background:linear-gradient(130deg,#6539b6,#211735);border-radius:19px}
+.hero h1{margin-top:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:#261d38;border:1px solid #493361;border-radius:16px;padding:16px 8px;text-align:center;cursor:pointer}
+.card .ico{font-size:30px}
+.card h3{font-size:14px}
+.panel{background:#251d36;padding:16px;border-radius:16px;margin-top:18px}
+input,select,textarea{width:100%;padding:13px;margin:9px 0 14px;border:1px solid #624c80;border-radius:10px;background:#171323;color:white;font-size:15px}
+textarea{min-height:110px}
+button{width:100%;padding:13px;background:#9258ed;border:0;border-radius:11px;color:white;font-size:15px;margin-top:5px}
+.secondary{background:#49336c}
+.result{background:#38264f;padding:14px;border-radius:12px;margin-top:12px;white-space:pre-wrap;line-height:1.6}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">🎵</div>
+ <div>
+  <h2>CHOVARAM</h2>
+  <small>AI MUSIC STUDIO • V3.0</small>
+ </div>
+</header>
+
+<main>
+ <div class="hero">
+  <h1>AI Music Studio 🎶</h1>
+  <p>आपके विचारों से संगीत की नई दुनिया।</p>
+  <button onclick="go('music')">Create AI Music</button>
+ </div>
+
+ <h3>🎧 Studio Features</h3>
+ <div class="grid">
+  <div class="card" onclick="go('music')"><div class="ico">🎼</div><h3>AI Music Maker</h3></div>
+  <div class="card" onclick="go('lyrics')"><div class="ico">✍️</div><h3>AI Lyrics Maker</h3></div>
+  <div class="card" onclick="go('voice')"><div class="ico">🎤</div><h3>Voice Studio</h3></div>
+  <div class="card" onclick="go('beats')"><div class="ico">🥁</div><h3>Panthi Beats</h3></div>
+ </div>
+
+ <div class="panel" id="music">
+  <h3>🎼 AI Music Prompt Studio</h3>
+  <label>गाने का विषय</label>
+  <input id="topic" placeholder="जैसे गुरु घासीदास बाबा">
+  <label>Music Style</label>
+  <select id="style">
+   <option>Panthi Music</option>
+   <option>Chhattisgarhi Folk</option>
+   <option>Bhajan</option>
+   <option>Karma Music</option>
+   <option>Dadariya</option>
+   <option>Indian Classical</option>
+  </select>
+  <label>संगीत का मूड</label>
+  <select id="mood">
+   <option>Energetic</option>
+   <option>Devotional</option>
+   <option>Peaceful</option>
+   <option>Celebration</option>
+  </select>
+  <button onclick="makePrompt()">✨ Generate Music Prompt</button>
+  <div class="result" id="promptResult">आपका Music Prompt यहाँ दिखाई देगा।</div>
+  <button class="secondary" onclick="copyResult('promptResult')">Copy Prompt</button>
+ </div>
+
+ <div class="panel" id="lyrics">
+  <h3>✍️ Lyrics Studio</h3>
+  <input id="lytopic" placeholder="गाने का विषय लिखें">
+  <select id="lystyle">
+   <option>छत्तीसगढ़ी पंथी गीत</option>
+   <option>छत्तीसगढ़ी भजन</option>
+   <option>छत्तीसगढ़ी लोकगीत</option>
+   <option>हिंदी भजन</option>
+  </select>
+  <button onclick="makeLyrics()">Generate Lyrics Template</button>
+  <div class="result" id="lyricsResult">आपके गीत का प्रारूप यहाँ आएगा।</div>
+  <button class="secondary" onclick="copyResult('lyricsResult')">Copy Lyrics</button>
+ </div>
+
+ <div class="panel" id="voice">
+  <h3>🎤 Voice Studio</h3>
+  <p>अपनी रिकॉर्डिंग सुनने के लिए नीचे रिकॉर्डिंग चुनें।</p>
+  <input type="file" id="audio" accept="audio/*">
+  <audio id="player" controls style="width:100%;display:none"></audio>
+  <p style="color:#c8b8df;font-size:12px">यहाँ अभी अपनी रिकॉर्डिंग सुन सकते हैं। AI Voice Conversion अभी उपलब्ध नहीं है।</p>
+ </div>
+
+ <div class="panel" id="beats">
+  <h3>🥁 Panthi Music Prompt</h3>
+  <p>पंथी संगीत में झांझ, मंजीरा, ढोलक और ऑक्टापैड का उपयोग करें।</p>
+  <button onclick="panthi()">Create Panthi Prompt</button>
+  <div class="result" id="beatResult">आपका पंथी प्रॉम्प्ट यहाँ आएगा।</div>
+  <button class="secondary" onclick="copyResult('beatResult')">Copy Prompt</button>
+ </div>
+</main>
+
+<script>
+function go(id){
+ document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+function makePrompt(){
+ let topic=document.getElementById("topic").value.trim();
+ let style=document.getElementById("style").value;
+ let mood=document.getElementById("mood").value;
+ if(!topic){alert("गाने का विषय लिखें");return;}
+ document.getElementById("promptResult").textContent=
+ "Create an original "+style+" song about "+topic+
+ ". Mood: "+mood+
+ ". Use beautiful Indian melodies, clear vocals, professional rhythm, rich percussion and high quality studio production.";
+}
+function makeLyrics(){
+ let topic=document.getElementById("lytopic").value.trim();
+ let style=document.getElementById("lystyle").value;
+ if(!topic){alert("गाने का विषय लिखें");return;}
+ document.getElementById("lyricsResult").textContent=
+ "गीत शैली: "+style+
+ "\nविषय: "+topic+
+ "\n\nमुखड़ा:\n"+topic+" की महिमा गाएँ,\nमिलकर प्रेम का दीप जलाएँ।\n\nअंतरा 1:\nनई उमंग से गीत सजाएँ,\nसच्चाई के मार्ग पर जाएँ।\n\nअंतरा 2:\nमिलकर अपनी धुन बजाएँ,\nसुंदर संगीत सभी को सुनाएँ।";
+}
+function panthi(){
+ document.getElementById("beatResult").textContent=
+ "Original Chhattisgarhi Panthi devotional music. Energetic male lead vocals, group chorus, traditional jhanjh, manjira, dholak, octapad, powerful rhythmic percussion, uplifting melody, live stage performance atmosphere.";
+}
+function copyResult(id){
+ let text=document.getElementById(id).textContent;
+ if(!text){return;}
+ navigator.clipboard.writeText(text)
+ .then(()=>alert("कॉपी हो गया!"))
+ .catch(()=>alert("टेक्स्ट को मैन्युअली कॉपी करें।"));
+}
+document.getElementById("audio").addEventListener("change",function(){
+ let f=this.files[0];
+ if(f){
+ let p=document.getElementById("player");
+ p.src=URL.createObjectURL(f);
+ p.style.display="block";
+ }
+});
+</script>
+</body>
+  </html>
+                        
