@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHOVARAM AI MUSIC STUDIO</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#100d1d;color:white;
+ font-family:Arial,sans-serif;
+}
+header{
+ background:#211735;padding:18px;
+ display:flex;align-items:center;gap:12px;
+ border-bottom:1px solid #453264;
+}
+.logo{
+ width:48px;height:48px;border-radius:15px;
+ background:linear-gradient(135deg,#a16aff,#4423a8);
+ display:grid;place-items:center;font-size:26px;
+}
+header h2{margin:0;font-size:19px}
+header small{color:#c1a5ff}
+main{padding:18px}
+.hero{
+ padding:22px 15px;border-radius:20px;
+ background:linear-gradient(135deg,#5432a0,#211735);
+ margin-bottom:22px;
+}
+.hero h1{font-size:26px;margin:0 0 10px}
+.hero p{color:#ddd0ff}
+.grid{
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:13px;
+}
+.card{
+ background:#211a32;padding:20px 12px;
+ border:1px solid #49366a;border-radius:17px;
+ cursor:pointer;text-align:center;
+}
+.card:active{background:#45316b}
+.card .emoji{font-size:34px}
+.card h3{font-size:15px}
+button{
+ background:#8958e8;color:white;border:0;
+ padding:13px;border-radius:12px;
+ width:100%;font-size:15px;
+}
+.section{margin-top:25px}
+footer{
+ text-align:center;padding:25px;color:#aa9bbd;
+ font-size:12px;
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">🎵</div>
+ <div>
+  <h2>CHOVARAM</h2>
+  <small>AI MUSIC STUDIO</small>
+ </div>
+</header>
+
+<main>
+ <div class="hero">
+  <h1>Create Your Music 🎶</h1>
+  <p>अपना संगीत बनाइए, अपनी आवाज़ में गाइए।</p>
+  <button onclick="openFeature('AI Music Generator')">
+   + Create New Music
+  </button>
+ </div>
+
+ <h3>🎧 Music Studio</h3>
+ <div class="grid">
+  <div class="card" onclick="openFeature('AI Music Generator')">
+   <div class="emoji">🎼</div>
+   <h3>AI Music</h3>
+  </div>
+  <div class="card" onclick="openFeature('Lyrics Generator')">
+   <div class="emoji">✍️</div>
+   <h3>Lyrics Generator</h3>
+  </div>
+  <div class="card" onclick="openFeature('AI Voice Singer')">
+   <div class="emoji">🎤</div>
+   <h3>AI Voice Singer</h3>
+  </div>
+  <div class="card" onclick="openFeature('Panthi Music')">
+   <div class="emoji">🥁</div>
+   <h3>Panthi Music</h3>
+  </div>
+  <div class="card" onclick="openFeature('Chhattisgarhi Music')">
+   <div class="emoji">🎹</div>
+   <h3>CG Music</h3>
+  </div>
+  <div class="card" onclick="openFeature('My Songs')">
+   <div class="emoji">🎧</div>
+   <h3>My Songs</h3>
+  </div>
+ </div>
+
+ <div class="section">
+  <h3>✨ आपका Music Studio</h3>
+  <p style="color:#b9a9d3">
+   नए गाने और संगीत की रचनाएँ यहाँ से शुरू करें।
+  </p>
+ </div>
+</main>
+
+<footer>
+ CHOVARAM AI MUSIC STUDIO<br>
+ VERSION 1.0
+</footer>
+
+<script>
+function openFeature(name){
+ alert(name + " फीचर अगले चरण में तैयार किया जाएगा।");
+}
+</script>
+</body>
+  </html>
+  
