@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CHOVARAM AI MUSIC STUDIO 4.0</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#100d1d;color:white;font-family:Arial}
+header{background:#211735;padding:16px;display:flex;align-items:center;gap:12px}
+.logo{background:linear-gradient(135deg,#bd75ff,#5025a5);padding:13px;border-radius:15px;font-size:25px}
+header h2{margin:0;font-size:18px}
+header small{color:#c8aaff}
+main{padding:15px}
+.hero{background:linear-gradient(135deg,#7543c4,#211735);padding:22px;border-radius:18px}
+.hero h1{margin-top:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card,.panel{background:#261d38;border:1px solid #493361;border-radius:15px;padding:16px}
+.card{text-align:center;cursor:pointer}
+.card .ico{font-size:29px}
+.card h3{font-size:14px}
+.panel{margin-top:17px}
+input,select,textarea{width:100%;padding:12px;margin:8px 0 14px;background:#171323;color:white;border:1px solid #654d82;border-radius:10px}
+textarea{min-height:100px}
+button{width:100%;padding:12px;border:0;border-radius:10px;background:#9258ed;color:white;font-size:14px;margin:5px 0;cursor:pointer}
+.secondary{background:#49336c}
+.danger{background:#9c344c}
+.result{background:#38264f;padding:12px;border-radius:10px;white-space:pre-wrap;line-height:1.6;margin-top:10px}
+.item{background:#38264f;padding:12px;border-radius:10px;margin:10px 0}
+audio{width:100%;margin-top:10px}
+small{color:#c8b8dc}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">🎵</div>
+ <div>
+  <h2>CHOVARAM</h2>
+  <small>AI MUSIC STUDIO • VERSION 4.0</small>
+ </div>
+</header>
+
+<main>
+ <div class="hero">
+  <h1>Music Production Studio 🎶</h1>
+  <p>अपना संगीत बनाएँ और अपनी रचनाएँ सुरक्षित रखें।</p>
+  <button onclick="go('creator')">+ Create New Music</button>
+ </div>
+
+ <h3>🎧 Studio Dashboard</h3>
+ <div class="grid">
+  <div class="card" onclick="go('creator')"><div class="ico">🎼</div><h3>Music Creator</h3></div>
+  <div class="card" onclick="go('lyrics')"><div class="ico">✍️</div><h3>Lyrics Studio</h3></div>
+  <div class="card" onclick="go('recorder')"><div class="ico">🎤</div><h3>Voice Recorder</h3></div>
+  <div class="card" onclick="go('player')"><div class="ico">🎧</div><h3>Audio Player</h3></div>
+  <div class="card" onclick="go('projects')"><div class="ico">📁</div><h3>My Projects</h3></div>
+  <div class="card" onclick="go('library')"><div class="ico">⬇️</div><h3>Audio Library</h3></div>
+ </div>
+
+ <div class="panel" id="creator">
+  <h3>🎼 Music Creator</h3>
+  <label>गाने का नाम</label>
+  <input id="musicName" placeholder="गाने का नाम">
+  <label>संगीत शैली</label>
+  <select id="musicStyle">
+   <option>Panthi Music</option>
+   <option>Chhattisgarhi Folk</option>
+   <option>Bhajan</option>
+   <option>Karma</option>
+   <option>Dadariya</option>
+  </select>
+  <label>गाने का विषय</label>
+  <textarea id="musicTopic" placeholder="गाने का विषय लिखें"></textarea>
+  <button onclick="createPrompt()">Generate Music Prompt</button>
+  <div class="result" id="musicResult">Music Prompt यहाँ दिखाई देगा।</div>
+  <button class="secondary" onclick="copyText('musicResult')">Copy Prompt</button>
+  <button onclick="saveProject()">Save Project</button>
+ </div>
+
+ <div class="panel" id="lyrics">
+  <h3>✍️ Lyrics Studio</h3>
+  <input id="lyName" placeholder="गीत का नाम">
+  <textarea id="lyText" placeholder="अपने गाने के बोल लिखें..."></textarea>
+  <button onclick="saveLyrics()">Save Lyrics</button>
+  <button class="secondary" onclick="downloadLyrics()">Download Lyrics</button>
+ </div>
+
+ <div class="panel" id="recorder">
+  <h3>🎤 Voice Recorder</h3>
+  <p><small>माइक्रोफोन की अनुमति देकर अपनी रिकॉर्डिंग करें।</small></p>
+  <button onclick="startRecording()">🔴 Start Recording</button>
+  <button class="secondary" onclick="stopRecording()">⏹ Stop Recording</button>
+  <audio id="recordedAudio" controls></audio>
+  <button onclick="downloadRecording()">Download Recording</button>
+  <p id="recordStatus">Recording अभी शुरू नहीं हुई है।</p>
+ </div>
+
+ <div class="panel" id="player">
+  <h3>🎧 Audio Player</h3>
+  <input type="file" id="audioFile" accept="audio/*">
+  <audio id="audioPlayer" controls></audio>
+ </div>
+
+ <div class="panel" id="projects">
+  <h3>📁 My Projects</h3>
+  <div id="projectList">अभी कोई प्रोजेक्ट नहीं है।</div>
+ </div>
+
+ <div class="panel" id="library">
+  <h3>⬇️ Audio Library</h3>
+  <input type="file" id="libraryFile" accept="audio/*">
+  <button onclick="addAudio()">Add Audio to Library</button>
+  <div id="audioList"></div>
+ </div>
+
+</main>
+
+<script>
+const KEY="chovaramV4Projects";
+let projects=JSON.parse(localStorage.getItem(KEY)||"[]");
+let recordingBlob=null;
+let mediaRecorder=null;
+let chunks=[];
+
+function go(id){
+ document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+function createPrompt(){
+ let name=document.getElementById("musicName").value.trim();
+ let style=document.getElementById("musicStyle").value;
+ let topic=document.getElementById("musicTopic").value.trim();
+ if(!name||!topic){alert("नाम और विषय लिखें");return;}
+ document.getElementById("musicResult").textContent=
+ "Create an original "+style+" song titled "+name+
+ ". Topic: "+topic+
+ ". Use expressive vocals, traditional Indian instruments, professional rhythm and studio-quality production.";
+}
+
+function saveProject(){
+ let name=document.getElementById("musicName").value.trim();
+ let prompt=document.getElementById("musicResult").textContent;
+ if(!name||prompt.includes("यहाँ")){alert("पहले Music Prompt बनाएँ");return;}
+ projects.push({name,prompt,date:new Date().toLocaleDateString()});
+ localStorage.setItem(KEY,JSON.stringify(projects));
+ renderProjects();
+ alert("प्रोजेक्ट सेव हो गया!");
+}
+
+function saveLyrics(){
+ let name=document.getElementById("lyName").value.trim();
+ let lyrics=document.getElementById("lyText").value.trim();
+ if(!name||!lyrics){alert("गीत का नाम और बोल लिखें");return;}
+ projects.push({name,lyrics,date:new Date().toLocaleDateString()});
+ localStorage.setItem(KEY,JSON.stringify(projects));
+ renderProjects();
+ alert("Lyrics सेव हो गए!");
+}
+
+function renderProjects(){
+ let box=document.getElementById("projectList");
+ box.innerHTML="";
+ if(!projects.length){box.textContent="अभी कोई प्रोजेक्ट नहीं है।";return;}
+ projects.forEach((p,i)=>{
+  let div=document.createElement("div");
+  div.className="item";
+  let title=document.createElement("b");
+  title.textContent=p.name;
+  let content=document.createElement("p");
+  content.textContent=p.lyrics||p.prompt||"";
+  let del=document.createElement("button");
+  del.className="danger";
+  del.textContent="Delete";
+  del.onclick=()=>{
+   projects.splice(i,1);
+   localStorage.setItem(KEY,JSON.stringify(projects));
+   renderProjects();
+  };
+  div.append(title,content,del);
+  box.append(div);
+ });
+}
+
+function copyText(id){
+ let value=document.getElementById(id).textContent;
+ if(navigator.clipboard){
+  navigator.clipboard.writeText(value).then(()=>alert("Copied!"))
+  .catch(()=>alert("कॉपी नहीं हुआ।"));
+ }else{alert("टेक्स्ट को मैन्युअली कॉपी करें।");}
+}
+
+function downloadLyrics(){
+ let text=document.getElementById("lyText").value;
+ if(!text){alert("पहले Lyrics लिखें");return;}
+ let blob=new Blob([text],{type:"text/plain"});
+ downloadBlob(blob,"Chovaram-Lyrics.txt");
+}
+
+function downloadBlob(blob,name){
+ let url=URL.createObjectURL(blob);
+ let a=document.createElement("a");
+ a.href=url;a.download=name;a.click();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+async function startRecording(){
+ try{
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+   alert("रिकॉर्डिंग के लिए सुरक्षित HTTPS Preview खोलें।");return;
+  }
+  let stream=await navigator.mediaDevices.getUserMedia({audio:true});
+  chunks=[];
+  mediaRecorder=new MediaRecorder(stream);
+  mediaRecorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+  mediaRecorder.onstop=()=>{
+   recordingBlob=new Blob(chunks,{type:mediaRecorder.mimeType||"audio/webm"});
+   document.getElementById("recordedAudio").src=URL.createObjectURL(recordingBlob);
+   document.getElementById("recordStatus").textContent="रिकॉर्डिंग तैयार है।";
+   stream.getTracks().forEach(t=>t.stop());
+  };
+  mediaRecorder.start();
+  document.getElementById("recordStatus").textContent="Recording चालू है...";
+ }catch(e){alert("माइक्रोफोन की अनुमति नहीं मिली।");}
+}
+
+function stopRecording(){
+ if(mediaRecorder&&mediaRecorder.state==="recording"){
+  mediaRecorder.stop();
+ }else{alert("पहले Recording शुरू करें।");}
+}
+
+function downloadRecording(){
+ if(!recordingBlob){alert("पहले रिकॉर्डिंग करें।");return;}
+ downloadBlob(recordingBlob,"Chovaram-Recording.webm");
+}
+
+document.getElementById("audioFile").onchange=function(){
+ let f=this.files[0];
+ if(f)document.getElementById("audioPlayer").src=URL.createObjectURL(f);
+};
+
+function addAudio(){
+ let f=document.getElementById("libraryFile").files[0];
+ if(!f){alert("पहले Audio चुनें");return;}
+ let url=URL.createObjectURL(f);
+ let div=document.createElement("div");
+ div.className="item";
+ let title=document.createElement("p");
+ title.textContent=f.name;
+ let audio=document.createElement("audio");
+ audio.controls=true;audio.src=url;
+ div.append(title,audio);
+ document.getElementById("audioList").append(div);
+}
+
+renderProjects();
+</script>
+</body>
+</html>
